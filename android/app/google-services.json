@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "56728574256",
+    "project_id": "hollywood-contas",
+    "storage_bucket": "hollywood-contas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56728574256:android:52002365560e1eafce10f5",
+        "android_client_info": {
+          "package_name": "com.example.hollywood_conta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56728574256-aa613ghpr5ca0kgrq24jff9ku81g0i9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBZ4DIH29P3Q_TaB13uy1E0JJeWJJN11M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56728574256-aa613ghpr5ca0kgrq24jff9ku81g0i9l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56728574256-tduvd4psoftvtv9ll1lcu2ojlvum6br3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hollywoodContas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56728574256:android:8d7a56dd93141102ce10f5",
+        "android_client_info": {
+          "package_name": "com.example.hollywood_contas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56728574256-aa613ghpr5ca0kgrq24jff9ku81g0i9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBZ4DIH29P3Q_TaB13uy1E0JJeWJJN11M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56728574256-aa613ghpr5ca0kgrq24jff9ku81g0i9l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56728574256-tduvd4psoftvtv9ll1lcu2ojlvum6br3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hollywoodContas"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
