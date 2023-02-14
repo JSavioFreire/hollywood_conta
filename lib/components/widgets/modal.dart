@@ -4,38 +4,69 @@ import 'package:provider/provider.dart';
 
 showModal(context) {
   MyProvider provider = Provider.of<MyProvider>(context, listen: false);
+  String title = 'Adicionar nova conta';
+  provider.resetController();
 
   showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (context) => Column(
-            children: [
-              TextFormField(
-                controller: provider.nameController,
-              ),
-              TextFormField(
-                controller: provider.companyController,
-              ),
-              TextFormField(
-                controller: provider.payDayController,
-              ),
-              TextFormField(
-                controller: provider.valueController,
-              ),
-              Row(
+      isScrollControlled: true,
+      builder: (context) => SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                  30, 50, 30, MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Cancelar')),
-                  ElevatedButton(
-                      onPressed: () {
-                        provider.toDb();
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Salvar'))
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                  TextFormField(
+                    validator: (value) =>
+                        value!.isEmpty ? 'Password cannot be blank' : null,
+                    decoration:
+                        const InputDecoration(label: Text('Nome da conta')),
+                    controller: provider.nameController,
+                    keyboardType: TextInputType.name,
+                  ),
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(label: Text('Beneficiário')),
+                    controller: provider.companyController,
+                    keyboardType: TextInputType.name,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        label: Text('Data de vencimento')),
+                    controller: provider.payDayController,
+                    keyboardType: TextInputType.datetime,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(label: Text('Valor')),
+                    controller: provider.valueController,
+                    keyboardType: TextInputType.number,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancelar')),
+                        ElevatedButton(
+                            onPressed: () {
+                              provider.toDb();
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Salvar'))
+                      ],
+                    ),
+                  )
                 ],
-              )
-            ],
+              ),
+            ),
           ));
 }

@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       MyProvider provider = Provider.of<MyProvider>(context, listen: false);
       provider.refresh();
-
+      provider.refreshPayed();
       super.initState();
     });
   }

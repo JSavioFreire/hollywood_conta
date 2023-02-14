@@ -20,9 +20,9 @@ class BillSection extends StatelessWidget {
                   itemBuilder: (context, index) =>
                       MyListTile(bill: value.listBill[index])),
               ListView.builder(
-                itemCount: value.listBill.length,
+                itemCount: value.listBillPayed.length,
                 itemBuilder: (context, index) =>
-                    Text(value.listBill[index].name),
+                    MyListTile(bill: value.listBillPayed[index]),
               ),
             ]),
       ),

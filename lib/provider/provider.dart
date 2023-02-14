@@ -7,10 +7,19 @@ class MyProvider extends ChangeNotifier {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   List<Bill> listBill = [];
+  List<Bill> listBillPayed = [];
+
   TextEditingController nameController = TextEditingController();
   TextEditingController companyController = TextEditingController();
   TextEditingController payDayController = TextEditingController();
   TextEditingController valueController = TextEditingController();
+
+  void resetController() {
+    nameController.text = '';
+    companyController.text = '';
+    payDayController.text = '';
+    valueController.text = '';
+  }
 
   toDb() {
     Bill bill = Bill(
@@ -18,10 +27,22 @@ class MyProvider extends ChangeNotifier {
       name: nameController.text,
       company: companyController.text,
       payDay: payDayController.text,
-      value: valueController.text
+      value: valueController.text,
     );
     db.collection('contas').doc(bill.id).set(bill.toMap());
     refresh();
+  }
+
+  toDbPayed(bill) {
+    Bill billPayed = Bill(
+      id: const Uuid().v1(),
+      name: bill.name,
+      company: bill.company,
+      payDay: bill.payDay,
+      value: bill.value,
+    );
+    db.collection('pagas').doc(billPayed.id).set(billPayed.toMap());
+    refreshPayed();
   }
 
   refresh() async {
@@ -32,6 +53,17 @@ class MyProvider extends ChangeNotifier {
       temp.add(Bill.fromMap(doc.data()));
     }
     listBill = temp;
+    notifyListeners();
+  }
+
+  refreshPayed() async {
+    List<Bill> tempPayed = [];
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await db.collection('pagas').get();
+    for (var doc in snapshot.docs) {
+      tempPayed.add(Bill.fromMap(doc.data()));
+    }
+    listBillPayed = tempPayed;
     notifyListeners();
   }
 
