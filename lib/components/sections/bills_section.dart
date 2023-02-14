@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hollywood_conta/components/widgets/my_list_tile.dart';
+import 'package:hollywood_conta/components/widgets/my_list_tile_payed.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class BillSection extends StatelessWidget {
               ListView.builder(
                 itemCount: value.listBillPayed.length,
                 itemBuilder: (context, index) =>
-                    MyListTile(bill: value.listBillPayed[index]),
+                    MyListTilePayed(bill: value.listBillPayed[index]),
               ),
             ]),
       ),

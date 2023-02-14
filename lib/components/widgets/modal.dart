@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:provider/provider.dart';
 
-showModal(context) {
+showModal(context, {billEdit}) {
   MyProvider provider = Provider.of<MyProvider>(context, listen: false);
   String title = 'Adicionar nova conta';
   provider.resetController();
@@ -24,8 +24,6 @@ showModal(context) {
                     style: const TextStyle(fontSize: 24),
                   ),
                   TextFormField(
-                    validator: (value) =>
-                        value!.isEmpty ? 'Password cannot be blank' : null,
                     decoration:
                         const InputDecoration(label: Text('Nome da conta')),
                     controller: provider.nameController,
@@ -58,7 +56,7 @@ showModal(context) {
                             child: const Text('Cancelar')),
                         ElevatedButton(
                             onPressed: () {
-                              provider.toDb();
+                              provider.toDb(billEdit: billEdit);
                               Navigator.pop(context);
                             },
                             child: const Text('Salvar'))

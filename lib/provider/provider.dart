@@ -21,7 +21,7 @@ class MyProvider extends ChangeNotifier {
     valueController.text = '';
   }
 
-  toDb() {
+  toDb({billEdit}) {
     Bill bill = Bill(
       id: const Uuid().v1(),
       name: nameController.text,
@@ -29,11 +29,14 @@ class MyProvider extends ChangeNotifier {
       payDay: payDayController.text,
       value: valueController.text,
     );
+    if (billEdit != null) {
+      bill.id = billEdit.id;
+    }
     db.collection('contas').doc(bill.id).set(bill.toMap());
     refresh();
   }
 
-  toDbPayed(bill) {
+  toDbPayed(Bill bill) {
     Bill billPayed = Bill(
       id: const Uuid().v1(),
       name: bill.name,
