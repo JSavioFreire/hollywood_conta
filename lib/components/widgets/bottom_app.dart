@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hollywood_conta/provider/provider.dart';
 import 'package:hollywood_conta/theme/theme_colors.dart';
+import 'package:provider/provider.dart';
 
 class MyBottomApp extends StatelessWidget {
   const MyBottomApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
+    return Consumer<MyProvider>(
+      builder: (context, value, child) => BottomAppBar(
         color: ThemeColors.myBlue,
         height: 56,
         shape: const CircularNotchedRectangle(),
@@ -27,7 +30,9 @@ class MyBottomApp extends StatelessWidget {
                     )
                   ],
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  value.changePageButton(0);
+                },
               ),
               TextButton(
                 child: Column(
@@ -39,11 +44,14 @@ class MyBottomApp extends StatelessWidget {
                     )
                   ],
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  value.changePageButton(1);
+                },
               ),
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 }

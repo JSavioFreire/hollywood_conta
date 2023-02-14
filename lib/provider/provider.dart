@@ -8,36 +8,18 @@ class MyProvider extends ChangeNotifier {
 
   List<Bill> listBill = [];
   TextEditingController nameController = TextEditingController();
-
-  showModal(context) {
-    showModalBottomSheet(
-        context: context,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-        builder: (context) => Column(
-              children: [
-                TextFormField(
-                  controller: nameController,
-                ),
-                Row(
-                  children: [
-                    TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text('Cancelar')),
-                    ElevatedButton(
-                        onPressed: () {
-                          toDb();
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Salvar'))
-                  ],
-                )
-              ],
-            ));
-  }
+  TextEditingController companyController = TextEditingController();
+  TextEditingController payDayController = TextEditingController();
+  TextEditingController valueController = TextEditingController();
 
   toDb() {
-    Bill bill = Bill(id: const Uuid().v1(), name: nameController.text);
+    Bill bill = Bill(
+      id: const Uuid().v1(),
+      name: nameController.text,
+      company: companyController.text,
+      payDay: payDayController.text,
+      value: valueController.text
+    );
     db.collection('contas').doc(bill.id).set(bill.toMap());
     refresh();
   }
