@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "56728574256-tduvd4psoftvtv9ll1lcu2ojlvum6br3.apps.googleusercontent.com",
+              "client_id": "56728574256-eg4pv8tgr8hc1t14ifsjv0a3036i7mk9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.hollywoodContas"
+                "bundle_id": "com.example.hollywoodConta"
               }
             }
           ]
@@ -67,10 +67,10 @@
               "client_type": 3
             },
             {
-              "client_id": "56728574256-tduvd4psoftvtv9ll1lcu2ojlvum6br3.apps.googleusercontent.com",
+              "client_id": "56728574256-eg4pv8tgr8hc1t14ifsjv0a3036i7mk9.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.hollywoodContas"
+                "bundle_id": "com.example.hollywoodConta"
               }
             }
           ]
