@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hollywood_conta/components/widgets/modal_and_form/text_form_date.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,14 @@ showModal(context, {billEdit}) {
   MyProvider provider = Provider.of<MyProvider>(context, listen: false);
   String title = 'Adicionar nova conta';
   provider.resetController();
+
+  if (billEdit != null) {
+    title = 'Editar ${billEdit.name}';
+    provider.nameController.text = billEdit.name;
+    provider.companyController.text = billEdit.company;
+    provider.payDayController = billEdit.payDay;
+    provider.valueController.text = billEdit.value;
+  }
 
   showModalBottomSheet(
       context: context,
@@ -36,16 +45,11 @@ showModal(context, {billEdit}) {
                     keyboardType: TextInputType.name,
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(
-                        label: Text('Data de vencimento')),
-                    controller: provider.payDayController,
-                    keyboardType: TextInputType.datetime,
-                  ),
-                  TextFormField(
                     decoration: const InputDecoration(label: Text('Valor')),
                     controller: provider.valueController,
                     keyboardType: TextInputType.number,
                   ),
+                  FormDate(payDayController: provider.payDayController),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Row(

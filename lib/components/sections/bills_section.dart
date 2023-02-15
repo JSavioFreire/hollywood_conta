@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hollywood_conta/components/widgets/my_list_tile.dart';
-import 'package:hollywood_conta/components/widgets/my_list_tile_payed.dart';
+import 'package:hollywood_conta/components/widgets/list_tile/my_list_tile.dart';
+import 'package:hollywood_conta/components/widgets/list_tile/my_list_tile_payed.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:provider/provider.dart';
 

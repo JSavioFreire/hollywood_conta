@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hollywood_conta/firebase_options.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:hollywood_conta/screens/home_screen.dart';
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate
+  ],
+  supportedLocales: const [Locale('pt', 'BR')],
       title: 'Hollywood',
       debugShowCheckedModeBanner: false,
       theme: myTheme,

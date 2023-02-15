@@ -11,13 +11,12 @@ class MyProvider extends ChangeNotifier {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController companyController = TextEditingController();
-  TextEditingController payDayController = TextEditingController();
+  DateTime payDayController = DateTime.now();
   TextEditingController valueController = TextEditingController();
 
   void resetController() {
     nameController.text = '';
     companyController.text = '';
-    payDayController.text = '';
     valueController.text = '';
   }
 
@@ -26,7 +25,7 @@ class MyProvider extends ChangeNotifier {
       id: const Uuid().v1(),
       name: nameController.text,
       company: companyController.text,
-      payDay: payDayController.text,
+      payDay: payDayController.toString(),
       value: valueController.text,
     );
     if (billEdit != null) {
@@ -73,6 +72,11 @@ class MyProvider extends ChangeNotifier {
   delete(Bill bill) {
     db.collection('contas').doc(bill.id).delete();
     refresh();
+  }
+
+  deletePayed(Bill bill) {
+    db.collection('pagas').doc(bill.id).delete();
+    refreshPayed();
   }
 
   PageController controllerPageView = PageController(

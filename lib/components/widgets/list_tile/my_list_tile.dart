@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hollywood_conta/components/widgets/dismissible.dart';
-import 'package:hollywood_conta/components/widgets/modal.dart';
+import 'package:hollywood_conta/components/widgets/modal_and_form/modal.dart';
 import 'package:hollywood_conta/model/bill_model.dart';
 import 'package:hollywood_conta/theme/theme_colors.dart';
 
