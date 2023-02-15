@@ -9,14 +9,17 @@ class MyProvider extends ChangeNotifier {
   List<Bill> listBill = [];
   List<Bill> listBillPayed = [];
 
+  DateTime currentDate = DateTime.now();
+
   TextEditingController nameController = TextEditingController();
   TextEditingController companyController = TextEditingController();
-  DateTime payDayController = DateTime.now();
+  TextEditingController payDayController = TextEditingController();
   TextEditingController valueController = TextEditingController();
 
   void resetController() {
     nameController.text = '';
     companyController.text = '';
+    payDayController.text = '';
     valueController.text = '';
   }
 
@@ -25,8 +28,9 @@ class MyProvider extends ChangeNotifier {
       id: const Uuid().v1(),
       name: nameController.text,
       company: companyController.text,
-      payDay: payDayController.toString(),
+      payDay: payDayController.text,
       value: valueController.text,
+      currentDate: currentDate.toString(),
     );
     if (billEdit != null) {
       bill.id = billEdit.id;
@@ -42,6 +46,7 @@ class MyProvider extends ChangeNotifier {
       company: bill.company,
       payDay: bill.payDay,
       value: bill.value,
+      currentDate: currentDate.toString(),
     );
     db.collection('pagas').doc(billPayed.id).set(billPayed.toMap());
     refreshPayed();
@@ -50,7 +55,7 @@ class MyProvider extends ChangeNotifier {
   refresh() async {
     List<Bill> temp = [];
     QuerySnapshot<Map<String, dynamic>> snapshot =
-        await db.collection('contas').get();
+        await db.collection('contas').orderBy('payDay').get();
     for (var doc in snapshot.docs) {
       temp.add(Bill.fromMap(doc.data()));
     }
@@ -61,7 +66,7 @@ class MyProvider extends ChangeNotifier {
   refreshPayed() async {
     List<Bill> tempPayed = [];
     QuerySnapshot<Map<String, dynamic>> snapshot =
-        await db.collection('pagas').get();
+        await db.collection('pagas').orderBy('currentDate',descending: true).get();
     for (var doc in snapshot.docs) {
       tempPayed.add(Bill.fromMap(doc.data()));
     }

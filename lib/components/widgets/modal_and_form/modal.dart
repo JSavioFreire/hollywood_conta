@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hollywood_conta/components/widgets/modal_and_form/text_form_date.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +48,24 @@ showModal(context, {billEdit}) {
                     controller: provider.valueController,
                     keyboardType: TextInputType.number,
                   ),
-                  FormDate(payDayController: provider.payDayController),
+                  TextFormField(
+                    controller: provider.payDayController,
+                    decoration: const InputDecoration(
+                      labelText: 'Vencimento',
+                    ),
+                    onTap: () async {
+                      dynamic date = DateTime(1900);
+                      FocusScope.of(context).requestFocus( FocusNode());
+
+                     date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100));
+
+                      provider.payDayController.text = date.toString();
+                    },
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Row(

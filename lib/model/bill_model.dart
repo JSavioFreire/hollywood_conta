@@ -4,6 +4,7 @@ class Bill {
   String company;
   String payDay;
   String value;
+  String currentDate;
 
   Bill({
     required this.id,
@@ -11,6 +12,7 @@ class Bill {
     required this.company,
     required this.payDay,
     required this.value,
+    required this.currentDate,
   });
 
   Bill.fromMap(Map<String, dynamic> map)
@@ -18,7 +20,8 @@ class Bill {
         name = map["name"],
         company = map["company"],
         payDay = map["payDay"],
-        value = map["value"];
+        value = map["value"],
+        currentDate = map["currentDate"];
 
   Map<String, dynamic> toMap() {
     return {
@@ -27,6 +30,7 @@ class Bill {
       "company": company,
       "payDay": payDay,
       "value": value,
+      "currentDate": currentDate
     };
   }
 }

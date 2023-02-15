@@ -11,6 +11,8 @@ class MyListTilePayed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyProvider provider = Provider.of<MyProvider>(context, listen: false);
+    DateTime parsedDate = DateTime.parse(bill.payDay);
+    DateTime parsedDatePayed = DateTime.parse(bill.currentDate);
 
     return InkWell(
       onLongPress: () => showDialog(
@@ -73,7 +75,8 @@ class MyListTilePayed extends StatelessWidget {
                         'Pago em:',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
-                      Text(bill.payDay),
+                      Text(
+                          '${parsedDatePayed.day} / ${parsedDatePayed.month} / ${parsedDatePayed.year}'),
                     ],
                   ),
                 ),
@@ -84,7 +87,8 @@ class MyListTilePayed extends StatelessWidget {
                       'Vencimento',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
-                    Text(bill.payDay),
+                    Text(
+                        '${parsedDate.day} / ${parsedDate.month} / ${parsedDate.year}'),
                   ],
                 ),
               ],
