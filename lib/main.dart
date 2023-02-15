@@ -5,6 +5,7 @@ import 'package:hollywood_conta/firebase_options.dart';
 import 'package:hollywood_conta/provider/provider.dart';
 import 'package:hollywood_conta/screens/home_screen.dart';
 import 'package:hollywood_conta/theme/my_theme.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Intl.defaultLocale = 'pt_BR';
+
     return MaterialApp(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

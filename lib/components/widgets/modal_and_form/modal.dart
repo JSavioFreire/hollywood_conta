@@ -11,7 +11,6 @@ showModal(context, {billEdit}) {
     title = 'Editar ${billEdit.name}';
     provider.nameController.text = billEdit.name;
     provider.companyController.text = billEdit.company;
-    provider.payDayController = billEdit.payDay;
     provider.valueController.text = billEdit.value;
   }
 
@@ -55,9 +54,9 @@ showModal(context, {billEdit}) {
                     ),
                     onTap: () async {
                       dynamic date = DateTime(1900);
-                      FocusScope.of(context).requestFocus( FocusNode());
+                      FocusScope.of(context).requestFocus(FocusNode());
 
-                     date = await showDatePicker(
+                      date = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime(1900),

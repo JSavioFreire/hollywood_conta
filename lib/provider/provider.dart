@@ -9,6 +9,9 @@ class MyProvider extends ChangeNotifier {
   List<Bill> listBill = [];
   List<Bill> listBillPayed = [];
 
+  double totalAll = 0;
+  double totalAllPayed = 0;
+
   DateTime currentDate = DateTime.now();
 
   TextEditingController nameController = TextEditingController();
@@ -54,10 +57,14 @@ class MyProvider extends ChangeNotifier {
 
   refresh() async {
     List<Bill> temp = [];
+    totalAll = 0;
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await db.collection('contas').orderBy('payDay').get();
     for (var doc in snapshot.docs) {
       temp.add(Bill.fromMap(doc.data()));
+    }
+    for (int i = 0; i < temp.length; i++) {
+      totalAll += double.parse(temp[i].value);
     }
     listBill = temp;
     notifyListeners();
@@ -65,10 +72,16 @@ class MyProvider extends ChangeNotifier {
 
   refreshPayed() async {
     List<Bill> tempPayed = [];
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await db.collection('pagas').orderBy('currentDate',descending: true).get();
+    totalAllPayed = 0;
+    QuerySnapshot<Map<String, dynamic>> snapshot = await db
+        .collection('pagas')
+        .orderBy('currentDate', descending: true)
+        .get();
     for (var doc in snapshot.docs) {
       tempPayed.add(Bill.fromMap(doc.data()));
+    }
+    for (int i = 0; i < tempPayed.length; i++) {
+      totalAllPayed += double.parse(tempPayed[i].value);
     }
     listBillPayed = tempPayed;
     notifyListeners();
