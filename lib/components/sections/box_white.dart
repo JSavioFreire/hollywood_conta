@@ -48,7 +48,7 @@ class BoxWhite extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                               Text(
-                                value.totalAllPayed.toString(),
+                                'R\$ ${value.totalAllPayed.toString()}',
                                 style: const TextStyle(
                                     fontSize: 20, color: ThemeColors.myGreen),
                               )
@@ -62,7 +62,7 @@ class BoxWhite extends StatelessWidget {
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                               Text(
-                                value.totalAll.toString(),
+                                'R\$ ${value.totalAll.toString()}',
                                 style: const TextStyle(
                                     fontSize: 20, color: ThemeColors.myYellow),
                               )

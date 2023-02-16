@@ -37,13 +37,29 @@ class MonthBoxWhite extends StatelessWidget {
                       backgroundColor: ThemeColors.myRedOpacity,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text('Pago:10597,54'),
-                      Text('Restante:10597,54')
-                    ],
-                  )
+                  otherMonth == 0
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Pago: ${value.currentMonthAllPayed}'),
+                            Text('Restante: ${value.currentMonthAll}')
+                          ],
+                        )
+                      : otherMonth == 1
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Pago: ${value.prevMonthAllPayed}'),
+                                Text('Restante: ${value.prevMonthAll}')
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Pago: ${value.nextMonthAllPayed}'),
+                                Text('Restante: ${value.nextMonthAll}')
+                              ],
+                            )
                 ],
               ),
             ),

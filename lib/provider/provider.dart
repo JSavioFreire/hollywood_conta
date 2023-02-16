@@ -12,6 +12,15 @@ class MyProvider extends ChangeNotifier {
   double totalAll = 0;
   double totalAllPayed = 0;
 
+  double currentMonthAll = 0;
+  double currentMonthAllPayed = 0;
+
+  double prevMonthAll = 0;
+  double prevMonthAllPayed = 0;
+
+  double nextMonthAll = 0;
+  double nextMonthAllPayed = 0;
+
   DateTime currentDate = DateTime.now();
 
   TextEditingController nameController = TextEditingController();
@@ -27,6 +36,8 @@ class MyProvider extends ChangeNotifier {
   }
 
   toDb({billEdit}) {
+    valueController.text = valueController.text.replaceAll(',', '.');
+
     Bill bill = Bill(
       id: const Uuid().v1(),
       name: nameController.text,
@@ -58,6 +69,9 @@ class MyProvider extends ChangeNotifier {
   refresh() async {
     List<Bill> temp = [];
     totalAll = 0;
+    currentMonthAll = 0;
+    prevMonthAll = 0;
+    nextMonthAll = 0;
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await db.collection('contas').orderBy('payDay').get();
     for (var doc in snapshot.docs) {
@@ -65,6 +79,17 @@ class MyProvider extends ChangeNotifier {
     }
     for (int i = 0; i < temp.length; i++) {
       totalAll += double.parse(temp[i].value);
+      DateTime payDayDateTime = DateTime.parse(temp[i].payDay);
+
+      if (payDayDateTime.month == currentDate.month) {
+        currentMonthAll += double.parse(temp[i].value);
+      }
+      if (payDayDateTime.month == currentDate.month - 1) {
+        prevMonthAll += double.parse(temp[i].value);
+      }
+      if (payDayDateTime.month == currentDate.month + 1) {
+        nextMonthAll += double.parse(temp[i].value);
+      }
     }
     listBill = temp;
     notifyListeners();
@@ -73,6 +98,9 @@ class MyProvider extends ChangeNotifier {
   refreshPayed() async {
     List<Bill> tempPayed = [];
     totalAllPayed = 0;
+    currentMonthAllPayed = 0;
+    prevMonthAllPayed = 0;
+    nextMonthAllPayed = 0;
     QuerySnapshot<Map<String, dynamic>> snapshot = await db
         .collection('pagas')
         .orderBy('currentDate', descending: true)
@@ -82,6 +110,17 @@ class MyProvider extends ChangeNotifier {
     }
     for (int i = 0; i < tempPayed.length; i++) {
       totalAllPayed += double.parse(tempPayed[i].value);
+      DateTime payDayDateTime = DateTime.parse(tempPayed[i].payDay);
+
+      if (payDayDateTime.month == currentDate.month) {
+        currentMonthAllPayed += double.parse(tempPayed[i].value);
+      }
+      if (payDayDateTime.month == currentDate.month - 1) {
+        prevMonthAllPayed += double.parse(tempPayed[i].value);
+      }
+      if (payDayDateTime.month == currentDate.month + 1) {
+        nextMonthAllPayed += double.parse(tempPayed[i].value);
+      }
     }
     listBillPayed = tempPayed;
     notifyListeners();
