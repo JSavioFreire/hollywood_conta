@@ -66,11 +66,11 @@ class MyDismissible extends StatelessWidget {
               context: context,
               builder: (context) => AlertDialog(
                     title: const Text(
-                      'Você tem certeza?',
+                      'Você pagou?',
                       style: TextStyle(color: ThemeColors.myBlack),
                     ),
                     content: const Text(
-                      'Você deseja mesmo deletar essa conta?',
+                      'Você deseja mesmo marcar essa conta como paga?',
                     ),
                     actions: <Widget>[
                       ElevatedButton(

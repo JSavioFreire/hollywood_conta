@@ -34,8 +34,8 @@ class MonthBoxWhite extends StatelessWidget {
                       value: otherMonth == 0
                           ? value.porcentCurrentMonth
                           : otherMonth == 1
-                              ? value.nextMonthAll
-                              : value.prevMonthAll,
+                              ? value.porcentPrevMonth
+                              : value.porcentNextMonth,
                       minHeight: 12,
                       color: ThemeColors.myGreen,
                       backgroundColor: ThemeColors.myRedOpacity,
