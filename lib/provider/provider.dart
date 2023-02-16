@@ -14,12 +14,15 @@ class MyProvider extends ChangeNotifier {
 
   double currentMonthAll = 0;
   double currentMonthAllPayed = 0;
+  double porcentCurrentMonth = 0.0;
 
   double prevMonthAll = 0;
   double prevMonthAllPayed = 0;
+  double porcentPrevMonth = 0.0;
 
   double nextMonthAll = 0;
   double nextMonthAllPayed = 0;
+  double porcentNextMonth = 0.0;
 
   DateTime currentDate = DateTime.now();
 
@@ -35,7 +38,7 @@ class MyProvider extends ChangeNotifier {
     valueController.text = '';
   }
 
-  toDb({billEdit}) {
+  void toDb({billEdit}) {
     valueController.text = valueController.text.replaceAll(',', '.');
 
     Bill bill = Bill(
@@ -53,7 +56,7 @@ class MyProvider extends ChangeNotifier {
     refresh();
   }
 
-  toDbPayed(Bill bill) {
+  void toDbPayed(Bill bill) {
     Bill billPayed = Bill(
       id: const Uuid().v1(),
       name: bill.name,
@@ -66,7 +69,7 @@ class MyProvider extends ChangeNotifier {
     refreshPayed();
   }
 
-  refresh() async {
+  void refresh() async {
     List<Bill> temp = [];
     totalAll = 0;
     currentMonthAll = 0;
@@ -91,11 +94,13 @@ class MyProvider extends ChangeNotifier {
         nextMonthAll += double.parse(temp[i].value);
       }
     }
+    toPorcent();
+
     listBill = temp;
     notifyListeners();
   }
 
-  refreshPayed() async {
+  void refreshPayed() async {
     List<Bill> tempPayed = [];
     totalAllPayed = 0;
     currentMonthAllPayed = 0;
@@ -122,16 +127,30 @@ class MyProvider extends ChangeNotifier {
         nextMonthAllPayed += double.parse(tempPayed[i].value);
       }
     }
+    toPorcent();
+
     listBillPayed = tempPayed;
     notifyListeners();
   }
 
-  delete(Bill bill) {
+  void toPorcent() {
+    var threeCurrent =
+        currentMonthAllPayed * 100 / (currentMonthAll + currentMonthAllPayed);
+    var toInt = threeCurrent.toInt();
+    if (toInt == 100) {
+      porcentCurrentMonth = 1;
+    } else {
+      var withZero = '0.$toInt';
+      porcentCurrentMonth = double.parse(withZero);
+    }
+  }
+
+  void delete(Bill bill) {
     db.collection('contas').doc(bill.id).delete();
     refresh();
   }
 
-  deletePayed(Bill bill) {
+  void deletePayed(Bill bill) {
     db.collection('pagas').doc(bill.id).delete();
     refreshPayed();
   }

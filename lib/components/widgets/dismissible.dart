@@ -15,7 +15,7 @@ class MyDismissible extends StatelessWidget {
     MyProvider provider = Provider.of<MyProvider>(context, listen: false);
 
     return Dismissible(
-      key: ValueKey<Bill>(bill),
+      key: UniqueKey(),
       background: Container(
         color: ThemeColors.myGreen,
         alignment: Alignment.centerLeft,

@@ -30,8 +30,12 @@ class MonthBoxWhite extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: const LinearProgressIndicator(
-                      value: 0.5,
+                    child: LinearProgressIndicator(
+                      value: otherMonth == 0
+                          ? value.porcentCurrentMonth
+                          : otherMonth == 1
+                              ? value.nextMonthAll
+                              : value.prevMonthAll,
                       minHeight: 12,
                       color: ThemeColors.myGreen,
                       backgroundColor: ThemeColors.myRedOpacity,
@@ -41,23 +45,29 @@ class MonthBoxWhite extends StatelessWidget {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Pago: ${value.currentMonthAllPayed}'),
-                            Text('Restante: ${value.currentMonthAll}')
+                            Text(
+                                'Pago: ${value.currentMonthAllPayed.toStringAsFixed(2)}'),
+                            Text(
+                                'Restante: ${value.currentMonthAll.toStringAsFixed(2)}')
                           ],
                         )
                       : otherMonth == 1
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Pago: ${value.prevMonthAllPayed}'),
-                                Text('Restante: ${value.prevMonthAll}')
+                                Text(
+                                    'Pago: ${value.prevMonthAllPayed.toStringAsFixed(2)}'),
+                                Text(
+                                    'Restante: ${value.prevMonthAll.toStringAsFixed(2)}')
                               ],
                             )
                           : Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Pago: ${value.nextMonthAllPayed}'),
-                                Text('Restante: ${value.nextMonthAll}')
+                                Text(
+                                    'Pago: ${value.nextMonthAllPayed.toStringAsFixed(2)}'),
+                                Text(
+                                    'Restante: ${value.nextMonthAll.toStringAsFixed(2)}')
                               ],
                             )
                 ],
