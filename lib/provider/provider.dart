@@ -97,6 +97,8 @@ class MyProvider extends ChangeNotifier {
 
     listBill = temp;
     porcentCurrentMonth = toPorcent(currentMonthAll, currentMonthAllPayed);
+    porcentNextMonth = toPorcentNext(nextMonthAll, nextMonthAllPayed);
+    porcentPrevMonth = toPorcentPrev(prevMonthAll, prevMonthAllPayed);
 
     notifyListeners();
   }
@@ -131,11 +133,36 @@ class MyProvider extends ChangeNotifier {
 
     listBillPayed = tempPayed;
     porcentCurrentMonth = toPorcent(currentMonthAll, currentMonthAllPayed);
+    porcentNextMonth = toPorcentNext(nextMonthAll, nextMonthAllPayed);
+    porcentPrevMonth = toPorcentPrev(prevMonthAll, prevMonthAllPayed);
 
     notifyListeners();
   }
 
   double toPorcent(value, valuePayed) {
+    double threeCurrent = valuePayed * 100 / (value + valuePayed);
+    int toInt = threeCurrent.toInt();
+    notifyListeners();
+    if (toInt == 100) {
+      return 1;
+    } else {
+      var withZero = '0.$toInt';
+      return double.parse(withZero);
+    }
+  }
+
+  double toPorcentPrev(value, valuePayed) {
+    double threeCurrent = valuePayed * 100 / (value + valuePayed);
+    int toInt = threeCurrent.toInt();
+    if (toInt == 100) {
+      return 1;
+    } else {
+      var withZero = '0.$toInt';
+      return double.parse(withZero);
+    }
+  }
+
+  double toPorcentNext(value, valuePayed) {
     double threeCurrent = valuePayed * 100 / (value + valuePayed);
     int toInt = threeCurrent.toInt();
     if (toInt == 100) {
