@@ -97,8 +97,7 @@ class MyProvider extends ChangeNotifier {
 
     listBill = temp;
     porcentCurrentMonth = toPorcent(currentMonthAll, currentMonthAllPayed);
-    porcentPrevMonth = toPorcent(prevMonthAll, prevMonthAllPayed);
-    porcentNextMonth = toPorcent(nextMonthAll, nextMonthAllPayed);
+
     notifyListeners();
   }
 
@@ -132,8 +131,6 @@ class MyProvider extends ChangeNotifier {
 
     listBillPayed = tempPayed;
     porcentCurrentMonth = toPorcent(currentMonthAll, currentMonthAllPayed);
-    porcentPrevMonth = toPorcent(prevMonthAll, prevMonthAllPayed);
-    porcentNextMonth = toPorcent(nextMonthAll, nextMonthAllPayed);
 
     notifyListeners();
   }
