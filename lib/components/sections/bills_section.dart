@@ -16,10 +16,16 @@ class BillSection extends StatelessWidget {
             controller: value.controllerPageView,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              ListView.builder(
-                  itemCount: value.listBill.length,
-                  itemBuilder: (context, index) =>
-                      MyListTile(bill: value.listBill[index])),
+              RefreshIndicator(
+                onRefresh: () async {
+                  value.refresh();
+                  value.refreshPayed();
+                },
+                child: ListView.builder(
+                    itemCount: value.listBill.length,
+                    itemBuilder: (context, index) =>
+                        MyListTile(bill: value.listBill[index])),
+              ),
               ListView.builder(
                 itemCount: value.listBillPayed.length,
                 itemBuilder: (context, index) =>

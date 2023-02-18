@@ -69,7 +69,7 @@ class MyProvider extends ChangeNotifier {
     refreshPayed();
   }
 
-  void refresh() async {
+  refresh() async {
     List<Bill> temp = [];
     totalAll = 0;
     currentMonthAll = 0;
@@ -97,8 +97,8 @@ class MyProvider extends ChangeNotifier {
 
     listBill = temp;
     porcentCurrentMonth = toPorcent(currentMonthAll, currentMonthAllPayed);
-    porcentNextMonth = toPorcentNext(nextMonthAll, nextMonthAllPayed);
-    porcentPrevMonth = toPorcentPrev(prevMonthAll, prevMonthAllPayed);
+    porcentNextMonth = toPorcent(nextMonthAll, nextMonthAllPayed);
+    porcentPrevMonth = toPorcent(prevMonthAll, prevMonthAllPayed);
 
     notifyListeners();
   }
@@ -133,8 +133,8 @@ class MyProvider extends ChangeNotifier {
 
     listBillPayed = tempPayed;
     porcentCurrentMonth = toPorcent(currentMonthAll, currentMonthAllPayed);
-    porcentNextMonth = toPorcentNext(nextMonthAll, nextMonthAllPayed);
-    porcentPrevMonth = toPorcentPrev(prevMonthAll, prevMonthAllPayed);
+    porcentNextMonth = toPorcent(nextMonthAll, nextMonthAllPayed);
+    porcentPrevMonth = toPorcent(prevMonthAll, prevMonthAllPayed);
 
     notifyListeners();
   }
@@ -145,29 +145,12 @@ class MyProvider extends ChangeNotifier {
     notifyListeners();
     if (toInt == 100) {
       return 1;
-    } else {
-      var withZero = '0.$toInt';
+    }
+    else if( '$toInt'.length == 1){
+      var withZero = '0.0$toInt';
       return double.parse(withZero);
     }
-  }
-
-  double toPorcentPrev(value, valuePayed) {
-    double threeCurrent = valuePayed * 100 / (value + valuePayed);
-    int toInt = threeCurrent.toInt();
-    if (toInt == 100) {
-      return 1;
-    } else {
-      var withZero = '0.$toInt';
-      return double.parse(withZero);
-    }
-  }
-
-  double toPorcentNext(value, valuePayed) {
-    double threeCurrent = valuePayed * 100 / (value + valuePayed);
-    int toInt = threeCurrent.toInt();
-    if (toInt == 100) {
-      return 1;
-    } else {
+    else {
       var withZero = '0.$toInt';
       return double.parse(withZero);
     }
