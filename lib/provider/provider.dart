@@ -43,10 +43,10 @@ class MyProvider extends ChangeNotifier {
 
     Bill bill = Bill(
       id: const Uuid().v1(),
-      name: nameController.text,
-      company: companyController.text,
-      payDay: payDayController.text,
-      value: valueController.text,
+      name: nameController.text.isEmpty ? 'Sem Nome' : nameController.text,
+      company: companyController.text.isEmpty ? 'Sem beneficiário': companyController.text,
+      payDay: payDayController.text.isEmpty ? currentDate.toString() : payDayController.text,
+      value: valueController.text.isEmpty ? '0' : valueController.text,
       currentDate: currentDate.toString(),
     );
     if (billEdit != null) {
@@ -145,12 +145,10 @@ class MyProvider extends ChangeNotifier {
     notifyListeners();
     if (toInt == 100) {
       return 1;
-    }
-    else if( '$toInt'.length == 1){
+    } else if ('$toInt'.length == 1) {
       var withZero = '0.0$toInt';
       return double.parse(withZero);
-    }
-    else {
+    } else {
       var withZero = '0.$toInt';
       return double.parse(withZero);
     }
@@ -176,5 +174,16 @@ class MyProvider extends ChangeNotifier {
       duration: const Duration(milliseconds: 500),
       curve: Curves.linearToEaseOut,
     );
+  }
+
+  bool validate = false;
+
+  checkValidation(text) {
+    if (text.text.isEmpty) {
+      validate = true;
+    } else {
+      validate = false;
+    }
+    notifyListeners();
   }
 }
